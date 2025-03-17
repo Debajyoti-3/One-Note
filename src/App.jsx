@@ -31,12 +31,17 @@ function App() {
 
   // Local Storage implementation
 
-  useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem("todos"));
-    if (storedTodos && storedTodos.length > 0) {
-      setTodos(storedTodos);
-    }
-  }, []); // ✅ Runs only once on mount, preventing infinite loop
+ useEffect(() => {
+  const storedTodos = JSON.parse(localStorage.getItem("todos"));
+  if (storedTodos && storedTodos.length > 0) {
+    setTodos(storedTodos);
+  }
+}, []); // ✅ Runs only once on mount
+
+useEffect(() => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}, [todos]); // ✅ Runs every time `todos` updates
+
   
   
 
